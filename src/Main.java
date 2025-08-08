@@ -1,8 +1,12 @@
+import calculator.Calculator;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         int option = 0;
+        Calculator calc = new Calculator(numbers);
         Scanner sc = new Scanner(System.in);
 
         try {
@@ -20,10 +24,15 @@ public class Main {
 
                 switch (option) {
                     case 0:
+                        System.out.println("Closing program");
                         System.exit(0);
                         break;
                     case 1:
                         System.out.println("ADDITION");
+                        System.out.println("Please insert the numbers separated by a comma: ");
+                        String numStr = sc.nextLine();
+                        calc.setNumbersFromString(numStr);
+
                         break;
                     case 2:
                         System.out.println("SUBTRACTION");
