@@ -1,4 +1,5 @@
 import calculator.Calculator;
+import calculator.CalculatorService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,8 +7,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int option = 0;
-        Calculator calc = new Calculator(numbers);
+        CalculatorService calServ = new CalculatorService();
         Scanner sc = new Scanner(System.in);
+        String inputStr = null;
 
         try {
             do {
@@ -30,8 +32,9 @@ public class Main {
                     case 1:
                         System.out.println("ADDITION");
                         System.out.println("Please insert the numbers separated by a comma: ");
-                        String numStr = sc.nextLine();
-                        calc.setNumbersFromString(numStr);
+                        inputStr = sc.nextLine();
+                        Calculator cal = new Calculator();
+                        cal.setNumbersFromString(inputStr);
 
                         break;
                     case 2:

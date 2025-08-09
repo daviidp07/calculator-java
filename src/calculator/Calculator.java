@@ -3,32 +3,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    private List<Double> numbers;
+    private List<Double> numList;
 
     public Calculator(List<Double> numbers) {
-        this.numbers = numbers;
+        this.numList = numbers;
+    }
+
+    public Calculator() {
+        this.numList = new java.util.ArrayList<>();
     }
 
     public List<Double> getNumbers() {
-        return numbers;
+        return numList;
     }
 
     public void setNumbers(List<Double> numbers) {
-        this.numbers = numbers;
+        this.numList = numbers;
     }
 
-    public void setNumbersFromString(String input) {
+    public static Calculator fromString(String input) {
+        Calculator cal = new Calculator();
         String[] numbers = input.split(",");
-        List<Double> numList = new ArrayList<>();
-        for (String n : numbers ) {
+        for (String n : numbers) {
             try {
-                Double num = Double.parseDouble(n.trim());
+                double num = Double.parseDouble(n);
                 numList.add(num);
             }
             catch (NumberFormatException e) {
-                System.out.println("Invalid number on: " + n);
+                throw new IllegalArgumentException ("Invalid number");
             }
         }
-        setNumbers(numList);
+        if (numList.size() == 0) {
+            throw new IllegalArgumentException ("Invalid number");
+        }
+        return cal;
     }
 }
