@@ -22,20 +22,22 @@ public class Calculator {
     }
 
     public static Calculator fromString(String input) {
-        Calculator cal = new Calculator();
-        String[] numbers = input.split(",");
+        String[] numbers = input.split("[, ]");
+        List<Double> numListTemp = new ArrayList<>();
         for (String n : numbers) {
             try {
-                double num = Double.parseDouble(n);
-                numList.add(num);
+                double num = Double.parseDouble(n.trim());
+                numListTemp.add(num);
             }
             catch (NumberFormatException e) {
-                throw new IllegalArgumentException ("Invalid number");
+                throw new IllegalArgumentException ("Invalid number: "+n);
             }
         }
-        if (numList.size() == 0) {
-            throw new IllegalArgumentException ("Invalid number");
+        if (numListTemp.size() == 0) {
+            throw new IllegalArgumentException ("not found valid numbers");
         }
-        return cal;
+        else {
+            return new Calculator(numListTemp);
+        }
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int option = 0;
+        Integer option = null;
         CalculatorService calServ = new CalculatorService();
         Scanner sc = new Scanner(System.in);
         String inputStr = null;
@@ -23,19 +23,20 @@ public class Main {
                 System.out.println("0. Exit");
                 System.out.print("Type an option: ");
                 option = sc.nextInt();
+                sc.nextLine();
 
                 switch (option) {
                     case 0:
                         System.out.println("Closing program");
                         System.exit(0);
+                        sc.close();
                         break;
                     case 1:
                         System.out.println("ADDITION");
                         System.out.println("Please insert the numbers separated by a comma: ");
                         inputStr = sc.nextLine();
-                        Calculator cal = new Calculator();
-                        cal.setNumbersFromString(inputStr);
-
+                        Calculator.fromString(inputStr);
+                        System.out.println("result of addition: " + calServ.sum(Calculator.fromString(inputStr)));
                         break;
                     case 2:
                         System.out.println("SUBTRACTION");
@@ -56,7 +57,8 @@ public class Main {
                         System.out.println("Invalid option");
                 }
             }
-            while (option != 7);
+            while (option != 7 || option == 0);
+            sc.close();
         }
         catch (Exception e) {
 
